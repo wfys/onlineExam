@@ -1,0 +1,89 @@
+{% extends '../layout.html' %} <!--使用公共模块-->
+{% block main %}  <!--实现占位模块-->
+<ol class="breadcrumb">
+    <li><a href="/teacher">管理首页</a></li>
+    <li><span>手动组卷</span></li>
+</ol>
+<script src="/public/js/exam/layDate-v5.0.9/layDate-v5.0.9/laydate/laydate.js"></script>
+<form method="post" style="padding: 0px 10px">
+    <div class="form-group">
+        <label for="title">试卷名称</label>
+        <input type="text" class="form-control" id="title" placeholder="请输入试卷名称" name="title">
+    </div>
+    <div class="form-group">
+        <label for="subject">考试科目：</label>
+        <select name="subject" id="subject" class="form-control">
+            {% for content in contents %}
+            <option value="{{content._id.toString()}}">{{content.name}}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="description">考试描述</label>
+        <textarea class="form-control" id="description" placeholder="请输入考试描述"
+                  name="description" rows="3"></textarea>
+    </div>
+    <div class="row">
+        <div class="col-lg-4">
+            <div class="input-group">
+                <label for="startTime">开始考试时间</label><br/>
+                <input id="startTime" placeholder="请选择开始考试时间" name="startTime"
+                       type="text" class="form-control">
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="input-group">
+                <label for="endTime">结束考试时间</label><br/>
+                <input id="endTime" placeholder="请选择结束考试时间" name="endTime"
+                       type="text" class="form-control">
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="input-group">
+                <label for="sumScore">总分</label><br/>
+                <input id="sumScore" name="sumScore"
+                       type="text" class="form-control"  readonly  unselectable="on" value="0"/>
+            </div>
+        </div>
+    </div>
+    <br />
+    <div class="form-group" id="questions">
+        <label>题目</label>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <button onclick="addQuestion()" type="button">
+            <span class="glyphicon glyphicon-plus"></span>
+        </button>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <button onclick="deleteQuestion()" type="button">
+            <span class="glyphicon glyphicon-minus"></span>
+        </button>
+        <span id="error" style="color: red"></span>
+        <div class="input-group" id="1">
+            <span class="input-group-addon">1、</span>
+            <input type="text" class="form-control" placeholder="请输入题库里面的题号"
+                   name="question" style="width: 400px;" onchange="checkScore(1)">
+            <span class="hint" style="background-color: #d6d6d6;font-size: 12px"></span>
+        </div>
+    </div>
+    <span id="errorSum" style="color: #af0000"></span><br/>
+    <span class="hint" style="background-color: #d6d6d6;font-size: 12px">
+        难度单词说明：难度水平，分为三种,简单simple,一般general,困难hard<br/>
+        类别单词说明：题目类别，分为三种,单选single,多选multiple,问答essay
+    </span>
+    <button type="submit" class="btn btn-success center-block btn-lg" id="submit">
+        确&nbsp;&nbsp;&nbsp;&nbsp;定</button>
+</form>
+
+<script>
+    //执行一个laydate实例
+    laydate.render({
+        elem: '#startTime'
+        ,type: 'datetime'
+    });
+    laydate.render({
+        elem: '#endTime'
+        ,type: 'datetime'
+    });
+</script>
+<script type="text/javascript" src="/public/js/exam/handAdd.js"></script>
+{%endblock%}

@@ -1,0 +1,63 @@
+{% extends '../layout.html' %} <!--使用公共模块-->
+{% block main %}  <!--实现占位模块-->
+<ol class="breadcrumb">
+    <li><a href="/teacher">管理首页</a></li>
+    <li><span>试卷列表</span></li>
+</ol>
+<table class="table table-hover table-striped table-bordered">
+    <tr>
+        <th>考试名称</th>
+        <th>考试科目</th>
+        <th>出题老师</th>
+        <th>考试开始时间</th>
+        <th>操作</th>
+    </tr>
+    {% for content in contents %}
+    <tr>
+        <th>{{content.title}}</th>
+        <th>{{content.subject.name}}</th>
+        <th>{{content.teacher.name}}</th>
+        <th>{{content.startTime|date("Y年m月d日H:i:s",-8*60)}}</th>
+        <th>
+            <a href="/teacher/exam/view?_id={{content._id.toString()}}">详情</a>
+            {% if userInfo._id.toString()==content.teacher._id.toString() %}
+            <a href="javascript:" onclick="deletes('/teacher/exam/delete?_id={{content._id.toString()}}')" >删除</a>
+            {% elseif userInfo.isAdmin %}
+            <a href="javascript:" onclick="deletes('/teacher/exam/delete?_id={{content._id.toString()}}')" >删除</a>
+            {% endif %}
+        </th>
+    </tr>
+    {% endfor %}
+</table>
+<script type="text/javascript" src="/public/js/layer-v3.1.1/layer-v3.1.1/layer/layer.js"></script>
+<script >
+    function deletes(url) {
+        layer.confirm('真的要删除这次试卷吗？', {
+            btn: ['确定','取消'] //按钮
+        }, function(){
+            $.ajax({
+                url:url,
+                success:function (result) {
+                    if(!result.code) {
+                        window.location.reload();
+                        layer.msg(result.message, {icon: 1});
+                    }else{
+                        layer.msg(result.message, {icon: 1});
+                    }
+                }
+            });
+        }, function(){
+            layer.msg('已取消', {icon: 1});
+        });
+    }
+</script>
+<nav aria-label="...">
+    <ul class="pager">
+        <li class="previous"><a href="/teacher/exam?page={{page-1}}">
+            <span aria-hidden="true">&larr;</span>上一页</a></li>
+        <li>共有{{count}}条数据，每页显示{{limit}}条数据，共{{pages}}页，当前第{{page}}页</li>
+        <li class="next"><a href="/teacher/exam?page={{page+1}}">下一页
+            <span aria-hidden="true">&rarr;</span></a></li>
+    </ul>
+</nav>
+{%endblock%}

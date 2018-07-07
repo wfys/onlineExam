@@ -1,0 +1,62 @@
+{% extends 'layout.html' %} <!--使用公共模块-->
+{% block main %}  <!--实现占位模块-->
+<ol class="breadcrumb">
+    <li><a href="/teacher">管理首页</a></li>
+    <li><span>问答题题库题目添加</span></li>
+</ol>
+<form method="post" style="padding: 0px 10px">
+    <div class="form-group">
+        <label for="catalog">题库目录名称：</label>
+        <select name="catalog" id="catalog" class="form-control">
+            <option value="{{catalog._id.toString()}}">{{catalog.name}}</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="style">题库类型：</label>
+        <select name="style" id="style" class="form-control">
+            <option value="essay">问答题</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="title">题目描述</label>
+        <textarea class="form-control" id="title" placeholder="请输入题目描述"
+                  name="title" rows="5"></textarea>
+    </div>
+    <div class="form-group">
+        <label for="answer">答案描述</label>
+        <textarea class="form-control" id="answer" placeholder="请输入答案描述"
+                  name="answer" rows="5"></textarea>
+    </div>
+    <div class="row">
+        <div class="col-lg-3">
+            <div class="input-group">
+                <label for="difficulty">考点</label>
+                <select name="difficulty" id="difficulty" class="form-control">
+                    <option value="simple">简单</option>
+                    <option value="general">一般</option>
+                    <option value="hard">困难</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="input-group">
+                <label for="score">分值</label>
+                <input type="text" class="form-control" id="score" placeholder="请输入本题分值"
+                       name="score">
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="input-group">
+                <label for="center">考点</label>
+                <input type="text" class="form-control" id="center" placeholder="请输入本题考点"
+                       name="center">
+            </div>
+        </div>
+    </div>
+    <br />
+    <span id="errorSum" style="color: red"></span>
+    <button type="submit" class="btn btn-success center-block btn-lg" id="submit">
+        确&nbsp;&nbsp;&nbsp;&nbsp;定</button>
+</form>
+<script type="text/javascript" src="/public/js/essay_questionAdd.js"></script>
+{%endblock%}

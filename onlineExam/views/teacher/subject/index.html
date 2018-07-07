@@ -1,0 +1,54 @@
+{% extends '../layout.html' %} <!--使用公共模块-->
+{% block main %}  <!--实现占位模块-->
+<ol class="breadcrumb">
+    <li><a href="/teacher">管理首页</a></li>
+    <li><span>科目列表</span></li>
+</ol>
+<span>科目最多为10个</span>
+<table class="table table-hover table-striped table-bordered">
+    <tr>
+        <th>分类名称</th>
+        <th>创建人</th>
+        <th>操作</th>
+    </tr>
+    {% for content in contents %}
+    <tr>
+        <th>{{content.name}}</th>
+        <th>{{content.teacher.name}}</th>
+        <th>
+            {% if userInfo._id.toString()==content.teacher._id.toString() %}
+            <a href="/teacher/subject/edit?id={{content._id.toString()}}">修改</a>
+            <a  href="javascript:" onclick="deletes('/teacher/subject/delete?id={{content._id.toString()}}')">删除</a>
+            {% elseif userInfo.isAdmin %}
+            <a href="/teacher/subject/edit?id={{content._id.toString()}}">修改</a>
+            <a  href="javascript:" onclick="deletes('/teacher/subject/delete?id={{content._id.toString()}}')">删除</a>
+            {% else %}
+            <span >暂无权限</span>
+            {% endif %}
+        </th>
+    </tr>
+    {% endfor %}
+</table>
+<script type="text/javascript" src="/public/js/layer-v3.1.1/layer-v3.1.1/layer/layer.js"></script>
+<script>
+    function deletes(url) {
+        layer.confirm('真的要删除这个科目吗？', {
+            btn: ['确定','取消'] //按钮
+        }, function(){
+            $.ajax({
+                url:url,
+                success:function (result) {
+                    if(!result.code) {
+                        window.location.reload();
+                        layer.msg(result.message, {icon: 1});
+                    }else{
+                        layer.msg(result.message, {icon: 1});
+                    }
+                }
+            });
+        }, function(){
+            layer.msg('已取消', {icon: 1});
+        });
+    }
+</script>
+{%endblock%}

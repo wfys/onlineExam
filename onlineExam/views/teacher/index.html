@@ -1,0 +1,18 @@
+{% extends 'layout.html' %} <!--使用公共模块-->
+{% block main %}  <!--实现占位模块-->
+<link rel="stylesheet" href="/public/css/teacher/index.css" type="text/css"/>
+<div class="jumbotron" style="background: white;">
+    <h1>Hello, {{userInfo.no}}!</h1>
+    <p>欢迎进入在线考试后台管理系统！</p>
+</div>
+<div class="butterfly">
+    <div class="wing">
+        <div class="bit"></div>
+        <div class="bit"></div>
+    </div>
+    <div class="wing">
+        <div class="bit"></div>
+        <div class="bit"></div>
+    </div>
+</div>
+{%endblock%}

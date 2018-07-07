@@ -1,0 +1,44 @@
+{% extends 'layout.html' %} <!--使用公共模块-->
+{% block main %}  <!--实现占位模块-->
+<link rel="stylesheet" href="/public/css/inputBox.css" type="text/css"/>
+<ol class="breadcrumb">
+    <li><a href="/teacher">管理首页</a></li>
+    <li><a href="/teacher/choice">题目题库列表</a></li>
+    <li><span>题目详情</span></li>
+</ol>
+<div class="jumbotron text-left" style="background: white;">
+    <p>{{content.index}}、{{content.title}}</p>
+    <form class="form">
+        {% for option in content.options %}
+        {% if content.style=='single' %}
+        <div class="inputGroup">
+            <input id="'radio'+'{{option.name}}'" name="radio" type="radio"/>
+            <label for="'radio'+'{{option.name}}'">{{option.name}}、{{option.info}}</label>
+        </div>
+        {% else %}
+        <div class="inputGroup">
+            <input id="'option'+'{{option.name}}'" name="radio" type="checkbox"/>
+            <label for="'option'+'{{option.name}}'">{{option.name}}、{{option.info}}</label>
+        </div>
+        {% endif %}
+        {% endfor %}
+    </form>
+    <p>正确答案：{{content.answer}}</p>
+    <p>分值：{{content.score}}</p>
+    <p>考点：{{content.center}}</p>
+    {% if content.difficulty=="simple"||content.difficulty=="" %}
+    <p>难度：简单</p>
+    {% elseif content.difficulty=="general" %}
+    <p>难度：一般</p>
+    {% elseif content.difficulty=="hard" %}
+    <p>难度：困难</p>
+    {% endif %}
+    {% if content.style=='single' %}
+    <p>题目类别：单选题</p>
+    {% else %}
+    <p>题目类别：多选题</p>
+    {% endif %}
+    <p>出题时间：{{content.createTime|date("Y年m月d日 H:i:s",-8*60)}}</p>
+
+</div>
+{%endblock%}

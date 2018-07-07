@@ -1,0 +1,34 @@
+{% extends '../layout.html' %} <!--使用公共模块-->
+{% block main %}  <!--实现占位模块-->
+<link rel="stylesheet" href="/public/css/student/waitExam.css" type="text/css"/>
+<script type="text/javascript" src="/public/js/exam/waitExam.js"></script>
+<ol class="breadcrumb">
+    <li><a href="/">首页</a></li>
+    <li><span>考试入口</span></li>
+</ol>
+<div>
+    <h3 class="text-center" style="margin-top: 0px"><b>{{content.title}}</b></h3>
+    <div class="text-center">
+        <h4>科目：{{content.subject.name}}</h4>
+        <h4>出题老师：{{content.teacher.name}}</h4>
+        <h4>题数：{{content.numOfQuestions}}道</h4>
+        <h4>总分：{{content.sumScore}}分</h4>
+        <h4>开始时间：{{content.startTime|date("Y年m月d日H:i:s",-8*60)}}</h4>
+        <h4>结束时间：{{content.endTime|date("Y年m月d日H:i:s",-8*60)}}</h4>
+        <h4>距离考试还有：</h4>
+        <span class="startTime" style="display: none;">{{content.startTime|date("Y,m,d,H,i,s",-8*60)}}</span>
+        <span class="endTime"  style="display: none">{{content.endTime|date("Y,m,d,H,i,s",-8*60)}}</span>
+        <span class="urlInfo" style="display: none">/paper?_id={{content._id.toString()}}</span>
+    </div>
+    <div class="countDown">
+        <div class="day text-center">0</div>天
+        <div class="hour text-center">0</div>时
+        <div class="minute text-center">0</div>分
+        <div class="second text-center">0</div>秒
+    </div>
+    <div class="hint text-center">
+        正在考试中。。。。。。
+    </div>
+    <div class="enter"><a href="#" class="activeTest">开始考试</a></div>
+</div>
+{%endblock%}

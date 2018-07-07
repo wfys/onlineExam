@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>在线考试系统</title>
+    <link rel="stylesheet" href="/public/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="/public/css/bootstrap-theme.min.css" type="text/css"/>
+    <link rel="stylesheet" href="/public/css/main.css" type="text/css"/>
+    <link rel="stylesheet" href="/public/css/student/student_index.css" type="text/css"/>
+    <script type="text/javascript" src="/public/js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="/public/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/public/js/index.js"></script>
+</head>
+<body>
+<!--顶部导航条-->
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="container-fluid">
+            <!--<div class="navbar-header">
+                <a class="navbar-brand" href="/">
+                    <img alt="exam" src="/public/images/logo.ico"/>
+                </a>
+            </div>-->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    {% if subject=="" %}
+                    <li class="active"><a href="/">首页</a></li>
+                    {% else %}
+                    <li><a href="/">首页</a></li>
+                    {% endif %}
+                    {% for sub in subjects %}
+                    {% if subject==sub.id.toString() %}
+                    <li class="active"><a href="/?subject={{sub.id.toString()}}">{{sub.name}}</a></li>
+                    {% else %}
+                    <li><a href="/?subject={{sub.id.toString()}}">{{sub.name}}</a></li>
+                    {% endif %}
+                    {% endfor %}
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    {% if userInfo.no %}
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                           aria-expanded="false">{{userInfo.no}}<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/api/userInfo">个人主页</a></li>
+                            <li><a href="/score">成绩管理</a></li>
+                            {% if !userInfo.isStudent %}
+                            <li><a href="/teacher">老师管理</a></li>
+                            {% endif %}
+                            <li><a href="javascript:;" id="logout">退出登录</a></li>
+                        </ul>
+                    </li>
+                    {% else %}
+                    <div class="navbar-count">
+                        <a class="login" href="/api/login">登录</a><span> /</span>
+                        <a class="register" href="/api/register">注册</a>
+                    </div>
+                    {% endif %}
+
+                </ul>
+            </div>
+        </div>
+    </div>
+</nav>
+<div class="content">
+    <div class="container">
+        {% block main %}{%endblock%}  <!--占位模块(板块)-->
+    </div>
+</div>
+<div class="end navbar-fixed-bottom">版权所有 © 在线考试系统 | 西南科技大学 京ICP备17102442号</div>
+</body>
+</html>

@@ -1,0 +1,28 @@
+{% extends 'layout.html' %} <!--使用公共模块-->
+{% block main %}  <!--实现占位模块-->
+<ol class="breadcrumb">
+    <li><a href="/teacher">管理首页</a></li>
+    <li><span>题库目录添加</span></li>
+</ol>
+<form method="post">
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="form-group">
+                <label for="name">目录名称</label>
+                <input type="text" class="form-control" id="name" placeholder="请输入目录名称" name="name">
+            </div>
+        </div>
+        <div class="col-lg-2">
+            <div class="input-group">
+                <label for="style">题库类别</label>
+                <select name="style" id="style" class="form-control">
+                    <option value="single">单选题库</option>
+                    <option value="multiple">多选题库</option>
+                    <option value="essay">问答题库</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-success center-block">确&nbsp;&nbsp;&nbsp;&nbsp;定</button>
+</form>
+{%endblock%}

@@ -1,0 +1,54 @@
+{% extends 'layout.html' %} <!--使用公共模块-->
+{% block main %}  <!--实现占位模块-->
+<ul class="nav nav-pills register_choose">
+    <li role="presentation" class="active"><a href="/api/userInfo">个人信息</a></li>
+    <li role="presentation"><a href="/api/userEdit">信息修改</a></li>
+</ul>
+<div class="userBox">
+    <div class="form-group">
+        <div class="input-group">
+            <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
+            <span class="info">{% if userInfo.isStudent %}学号：{% else %}
+                工号：{% endif %}{{info.no}}</span>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="input-group">
+            <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
+            <span class="info">姓名：{{info.name}}</span>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="input-group">
+            <span class="input-group-addon"><span class="glyphicon glyphicon-home"></span></span>
+            <span class="info">学校：{{info.school}}</span>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="input-group">
+            <span class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span></span>
+            <span class="info">邮箱：{{info.email}}</span>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="input-group">
+            <span class="input-group-addon"><span class="glyphicon glyphicon-phone"></span></span>
+            <span class="info">手机号码：{{info.phone}}</span>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="input-group">
+            <span class="input-group-addon"><span class="glyphicon glyphicon-globe"></span></span>
+            {% if userInfo.isStudent %}
+            <span class="info">职业：学生</span>
+            {% else %}
+            {% if userInfo.isAdmin %}
+            <span class="info">职业：管理员</span>
+            {% else %}
+            <span class="info">职业：老师</span>
+            {% endif %}
+            {% endif %}
+        </div>
+    </div>
+</div>
+{%endblock%}

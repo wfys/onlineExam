@@ -1,0 +1,24 @@
+{% extends 'layout.html' %} <!--使用公共模块-->
+{% block main %}  <!--实现占位模块-->
+<ol class="breadcrumb">
+    <li><a href="/teacher">管理首页</a></li>
+    <li><a href="/teacher/choice">题目题库列表</a></li>
+    <li><span>题目详情</span></li>
+</ol>
+<div class="jumbotron text-left" style="background: white;">
+    <p>{{content.index}}、{{content.title}}</p>
+    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{content.answer}}</p>
+    <p>分值：{{content.score}}</p>
+    <p>考点：{{content.center}}</p>
+    {% if content.difficulty=="simple"||content.difficulty=="" %}
+    <p>难度：简单</p>
+    {% elseif content.difficulty=="general" %}
+    <p>难度：一般</p>
+    {% elseif content.difficulty=="hard" %}
+    <p>难度：困难</p>
+    {% endif %}
+    <p>题目类别：问答题</p>
+    <p>出题时间：{{content.createTime|date("Y年m月d日 H:i:s",-8*60)}}</p>
+
+</div>
+{%endblock%}

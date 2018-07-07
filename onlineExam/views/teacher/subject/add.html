@@ -1,0 +1,15 @@
+{% extends '../layout.html' %} <!--使用公共模块-->
+{% block main %}  <!--实现占位模块-->
+
+<ol class="breadcrumb">
+    <li><a href="/teacher">管理首页</a></li>
+    <li><span>科目添加</span></li>
+</ol>
+<form method="post">
+    <div class="form-group">
+        <label for="name">科目名称</label>
+        <input type="text" class="form-control" id="name" placeholder="请输入科目名称" name="name">
+    </div>
+    <button type="submit" class="btn btn-success center-block">确&nbsp;&nbsp;&nbsp;&nbsp;定</button>
+</form>
+{%endblock%}

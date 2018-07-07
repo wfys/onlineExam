@@ -1,0 +1,43 @@
+{% extends '../layout.html' %} <!--使用公共模块-->
+{% block main %}  <!--实现占位模块-->
+<ol class="breadcrumb">
+    <li><a href="/">首页</a></li>
+    <li><span>成绩列表</span></li>
+</ol>
+<table class="table table-hover table-striped table-bordered">
+    <tr>
+        <th>考试</th>
+        <th>学号</th>
+        <th>姓名</th>
+        <th>成绩</th>
+        <th>状态</th>
+        <th>操作</th>
+    </tr>
+    {% for content in contents %}
+    <tr>
+        <th>{{content.exam.title}}</th>
+        <th>{{userInfo.no}}</th>
+        <th>{{userInfo.name}}</th>
+        <th>{{content.score}}</th>
+        {% if content.state=="2" %}
+        <th>简答题还未批改</th>
+        {% elseif content.state=="3" %}
+        <th>已批改</th>
+        {% else %}
+        <th>未交卷</th>
+        {% endif %}<th>
+        <a href="/score/view?ct={{content._id.toString()}}&ea={{content.exam._id.toString()}}">
+            详情</a></th>
+    </tr>
+    {% endfor %}
+</table>
+<nav aria-label="...">
+    <ul class="pager">
+        <li class="previous"><a href="/score?page={{page-1}}">
+            <span aria-hidden="true">&larr;</span>上一页</a></li>
+        <li>共有{{count}}条数据，每页显示{{limit}}条数据，共{{pages}}页，当前第{{page}}页</li>
+        <li class="next"><a href="/score?page={{page+1}}">下一页
+            <span aria-hidden="true">&rarr;</span></a></li>
+    </ul>
+</nav>
+{%endblock%}

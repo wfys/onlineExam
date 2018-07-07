@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="52dc77e0-5715-45fb-8319-ac1626611c2e" name="test" url="http://118.24.114.77">
+        <fileTransfer host="118.24.114.77" port="21" rootFolder="/data/home/www/onlineExam">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+          <option name="port" value="21" />
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

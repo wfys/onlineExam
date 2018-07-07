@@ -1,0 +1,87 @@
+.startExam a{
+    color: #0f0f0f;
+    padding: 5px;
+    background: #f7c5b8;
+    text-decoration: none;
+}
+.startExam a:hover{
+    background: #f7958e;
+}
+.register_choose{
+    font-size: 20px;
+    margin: 0px;
+    border: 0px;
+}
+.register_choose li{
+    margin: 0px;
+    width: 49.9%;
+    text-align: center;
+}
+.register_choose .active{
+    background: #6e9939;
+}
+.registerBox{
+    margin-top: 10px;
+}
+.registerBox form{
+    margin-left: 350px;
+}
+.registerBox form .form-group{
+    width: 500px;
+}
+.registerBox form .form-group #submit{
+    width: 500px;
+}
+.registerBox form .form-group .form-control-feedback{
+    left: 460px;
+}
+.loginBox{
+    margin-top: 10px;
+}
+.loginBox form{
+    margin-left: 350px;
+}
+.loginBox form .form-group{
+    width: 500px;
+}
+.loginBox form .form-group #submit{
+    width: 500px;
+}
+.loginBox form .form-group .form-control-feedback{
+    left: 460px;
+}
+.loginBox form .row col-xs-7{
+    width: 200px;
+}
+.loginBox form .row .col-xs-7 .form-group .form-control-feedback {
+    left:260px;
+}
+#codeInput{
+    width: 300px;
+}
+#idcode{
+    width: 200px;
+    margin-left: -150px;
+}
+#idcode .code{
+    font-size: 20px;
+    color: #999999;
+    font-weight: bolder;
+    background: #bed97b;
+    padding: 0px 5px;
+    cursor: pointer;
+}
+#idcode .codeInfo{
+    margin-left: 10px;
+    font-size: 14px;
+    color: blue;
+    cursor: pointer;
+    font-style: oblique;
+}
+.userBox{
+    margin-top: 10px;
+    margin-left: 400px;
+}
+.userBox .form-group .input-group .info{
+    padding-left: 10px;
+}

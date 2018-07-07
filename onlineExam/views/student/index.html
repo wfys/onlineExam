@@ -1,0 +1,26 @@
+{% extends 'layout.html' %} <!--使用公共模块-->
+{% block main %}  <!--实现占位模块-->
+<table class="table table-hover table-bordered">
+    <tr class="warning">
+        <th>考试名称</th>
+        <th>考试科目</th>
+        <th>出题老师</th>
+        <th>考试开始时间</th>
+        <th>考试结束时间</th>
+        <th>总分</th>
+        <th>状态</th>
+    </tr>
+    {% for content in contents %}
+    <tr>
+        <td>{{content.title}}</td>
+        <td>{{content.subject.name}}</td>
+        <td>{{content.teacher.name}}</td>
+        <td>{{content.startTime|date("Y年m月d日H:i:s",-8*60)}}</td>
+        <td>{{content.endTime|date("Y年m月d日H:i:s",-8*60)}}</td>
+        <td>{{content.sumScore}}</td>
+        <td><div class="startExam"><a href="/paper/wait?_id={{content._id.toString()}}">
+            开始考试</a></div></td>
+    </tr>
+    {% endfor %}
+</table>
+{%endblock%}

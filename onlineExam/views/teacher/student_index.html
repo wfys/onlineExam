@@ -1,0 +1,62 @@
+{% extends 'layout.html' %} <!--使用公共模块-->
+{% block main %}  <!--实现占位模块-->
+<ol class="breadcrumb">
+    <li><a href="/teacher">管理首页</a></li>
+    <li><span>学生列表</span></li>
+</ol>
+<table class="table table-hover table-striped table-bordered">
+    <tr>
+        <th>学号</th>
+        <th>姓名</th>
+        <th>学校</th>
+        <th>邮箱</th>
+        <th>手机号码</th>
+        <th>最近登录的IP地址</th>
+        <th>状态</th>
+        {% if userInfo.isAdmin %}
+        <th>操作</th>
+        {% endif %}
+    </tr>
+    {% for user in users %}
+    <tr>
+        <th>{{user.no}}</th>
+        <th>{{user.name}}</th>
+        <th>{{user.school}}</th>
+        <th>{{user.email}}</th>
+        <th>{{user.phone}}</th>
+        <th>{{user.ipAddress}}</th>
+        {% if user.status=="landing" %}
+        <th>在线</th>
+        {% else %}
+        <th>离线</th>
+        {% endif %}
+        {% if userInfo.isAdmin %}
+        <th><a href="javascript:" onclick="deletes('/teacher/admin/student/delete?_id={{user._id.toString()}}')">删除</a></th>
+        {% endif %}
+    </tr>
+    {% endfor %}
+</table>
+<script type="text/javascript" src="/public/js/layer-v3.1.1/layer-v3.1.1/layer/layer.js"></script>
+<script >
+    function deletes(url) {
+        layer.confirm('真的要删除这个学生吗？', {
+            btn: ['确定','取消'] //按钮
+        }, function(){
+            $.ajax({
+                url:url,
+                success:function (result) {
+                    if(!result.code) {
+                        window.location.reload();
+                        layer.msg(result.message, {icon: 1});
+                    }else{
+                        layer.msg(result.message, {icon: 1});
+                    }
+                }
+            });
+        }, function(){
+            layer.msg('已取消', {icon: 1});
+        });
+    }
+</script>
+{% include 'page.html' %}
+{%endblock%}

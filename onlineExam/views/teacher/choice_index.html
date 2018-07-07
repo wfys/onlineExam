@@ -1,0 +1,46 @@
+{% extends 'layout.html' %} <!--使用公共模块-->
+{% block main %}  <!--实现占位模块-->
+<ol class="breadcrumb">
+    <li><a href="/teacher">管理首页</a></li>
+    <li><span>题库列表</span></li>
+</ol>
+<table class="table table-hover table-striped table-bordered">
+    <tr>
+        <th>题库名称</th>
+        <th>题库类别</th>
+        <th>建库人</th>
+        <th>创建时间</th>
+        <th>总数</th>
+        <th>应用</th>
+        <th>操作</th>
+    </tr>
+    {% for content in contents %}
+    <tr>
+        <th><a href="/teacher/choice/see?catalog={{content._id.toString()}}">
+            {{content.name}}</a></th>
+        {% if content.style=="single"||content.style=="" %}
+        <th>单选题</th>
+        {% elseif content.style=="multiple" %}
+        <th>多选题</th>
+        {% elseif content.style=="essay" %}
+        <th>问答题</th>
+        {% endif %}
+        <th>{{content.teacher.name}}</th>
+        <th>{{content.createTime|date("Y年m月d日 H:i:s",-8*60)}}</th>
+        <th>{{content.number}}</th>
+        <th>{{content.views}}</th>
+        <th><a href="/teacher/choice/questionAdd?_id={{content._id.toString()}}">
+            <span class="glyphicon glyphicon-plus"></span></a></th>
+    </tr>
+    {% endfor %}
+</table>
+<nav aria-label="...">
+    <ul class="pager">
+        <li class="previous"><a href="/teacher/choice?page={{page-1}}">
+            <span aria-hidden="true">&larr;</span>上一页</a></li>
+        <li>共有{{count}}条数据，每页显示{{limit}}条数据，共{{pages}}页，当前第{{page}}页</li>
+        <li class="next"><a href="/teacher/choice?page={{page+1}}">下一页
+            <span aria-hidden="true">&rarr;</span></a></li>
+    </ul>
+</nav>
+{%endblock%}

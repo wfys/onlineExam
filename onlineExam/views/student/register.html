@@ -1,0 +1,93 @@
+{% extends 'layout.html' %} <!--使用公共模块-->
+{% block main %}  <!--实现占位模块-->
+<ul class="nav nav-pills register_choose">
+    <li role="presentation" ><a href="/api/login">登录</a></li>
+    <li role="presentation" class="active"><a href="/api/register">注册</a></li>
+</ul>
+<div class="registerBox">
+    <form method="post">
+        <div class="form-group has-feedback">
+            <label for="noInput">学号：</label>
+            <div class="input-group">
+                <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
+                <input type="text" class="form-control" placeholder="请输入学号或工号"
+                       id="noInput" name="noInput">
+            </div>
+            <span style="color:red;display: none;" class="tips"></span>
+            <span style="display: none;" class=" glyphicon glyphicon-remove form-control-feedback"></span>
+            <span style="display: none;" class="glyphicon glyphicon-ok form-control-feedback"></span>
+        </div>
+        <div class="form-group has-feedback">
+            <label for="usernameInput">姓名：</label>
+            <div class="input-group">
+                <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
+                <input type="text" class="form-control" placeholder="请输入真实姓名"
+                       id="usernameInput" name="usernameInput">
+            </div>
+            <span style="color:red;display: none;" class="tips"></span>
+            <span style="display: none;" class="glyphicon glyphicon-remove form-control-feedback"></span>
+            <span style="display: none;" class="glyphicon glyphicon-ok form-control-feedback"></span>
+        </div>
+        <div class="form-group has-feedback">
+            <label for="passwordInput">密码：</label>
+            <div class="input-group">
+                <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+                <input type="password" class="form-control" placeholder="请输入密码"
+                       id="passwordInput" name="passwordInput">
+            </div>
+            <span style="color:red;display: none;" class="tips"></span>
+            <span style="display: none;" class=" glyphicon glyphicon-remove form-control-feedback"></span>
+            <span style="display: none;" class="glyphicon glyphicon-ok form-control-feedback"></span>
+        </div>
+        <div class="form-group has-feedback">
+            <label for="repasswordInput">确认密码：</label>
+            <div class="input-group">
+                <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+                <input type="password" class="form-control" placeholder="请再次输入密码"
+                       id="repasswordInput">
+            </div>
+            <span style="color:red;display: none;" class="tips"></span>
+            <span style="display: none;" class="glyphicon glyphicon-remove form-control-feedback"></span>
+            <span style="display: none;" class="glyphicon glyphicon-ok form-control-feedback"></span>
+        </div>
+        <div class="form-group">
+            <label for="schoolInput">学校：</label>
+            <div class="input-group">
+                <span class="input-group-addon"><span class="glyphicon glyphicon-home"></span></span>
+                <select name="schoolInput" id="schoolInput" class="form-control" name="schoolInput">
+                    <option value="西南科技大学">西南科技大学</option>
+                    <option value="四川师范大学">四川师范大学</option>
+                    <option value="电子科技大学">电子科技大学</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group has-feedback">
+            <label for="emailInput">邮箱：</label>
+            <div class="input-group">
+                <span class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span></span>
+                <input type="text" class="form-control" placeholder="请输入有效邮箱"
+                       id="emailInput" name="emailInput">
+            </div>
+            <span style="color:red;display: none;" class="tips"></span>
+            <span style="display: none;" class="glyphicon glyphicon-remove form-control-feedback"></span>
+            <span style="display: none;" class="glyphicon glyphicon-ok form-control-feedback"></span>
+        </div>
+        <div class="form-group has-feedback">
+            <label for="phoneInput">手机号码：</label>
+            <div class="input-group">
+                <span class="input-group-addon"><span class="glyphicon glyphicon-phone"></span></span>
+                <input type="text" class="form-control" placeholder="请输入手机号码"
+                       id="phoneInput" name="phoneInput">
+            </div>
+            <span style="color:red;display: none;" class="tips"></span>
+            <span style="display: none;" class="glyphicon glyphicon-remove form-control-feedback"></span>
+            <span style="display: none;" class="glyphicon glyphicon-ok form-control-feedback"></span>
+        </div>
+        <div class="form-group">
+            <input type="submit" id="submit" class="form-control btn btn-primary"
+                   value="立&nbsp;&nbsp;即&nbsp;&nbsp;注&nbsp;&nbsp;册"/>
+        </div>
+    </form>
+    <script type="text/javascript" src="/public/js/register.js"></script>
+</div>
+{%endblock%}

@@ -1,0 +1,21 @@
+{% extends '../layout.html' %} <!--使用公共模块-->
+{% block main %}  <!--实现占位模块-->
+<ol class="breadcrumb">
+    <li><a href="/">首页</a></li>
+    <li><span>考试结束</span></li>
+</ol>
+<div class="showInfo">
+    <h1 class="text-center" style="margin-top: 0px">{{content.title}}</h1>
+    <div class="text-center">
+        {% if state==2 %}
+        <h3>问答题需要老师批改</h3>
+        <h3 style="margin-bottom: 40px">当前成绩为：{{score}}分</h3>
+        {% else %}
+        <h3>试卷已批改</h3>
+        <h3 style="margin-bottom: 40px">总成绩为：{{score}}分</h3>
+        {% endif %}
+
+    </div>
+
+</div>
+{%endblock%}

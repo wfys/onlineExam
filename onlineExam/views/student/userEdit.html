@@ -1,0 +1,106 @@
+{% extends 'layout.html' %} <!--使用公共模块-->
+{% block main %}  <!--实现占位模块-->
+<ul class="nav nav-pills register_choose">
+    <li role="presentation"><a href="/api/userInfo">个人信息</a></li>
+    <li role="presentation" class="active"><a href="/api/userEdit">信息修改</a></li>
+</ul>
+<div class="registerBox">
+    <form method="post">
+        <div class="form-group has-feedback" style="display: none;">
+            <label for="noInput">学号/工号：</label>
+            <div class="input-group">
+                <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
+                <input type="text" class="form-control" placeholder="请输入学号或工号"
+                       id="noInput" name="noInput" value="{{info.no}}">
+            </div>
+            <span style="color:red;display: none;" class="tips"></span>
+            <span style="display: none;" class=" glyphicon glyphicon-remove form-control-feedback"></span>
+            <span style="display: none;" class="glyphicon glyphicon-ok form-control-feedback"></span>
+        </div>
+        <div class="form-group has-feedback">
+            <label for="usernameInput">姓名：</label>
+            <div class="input-group">
+                <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
+                <input type="text" class="form-control" placeholder="请输入真实姓名"
+                       id="usernameInput" name="usernameInput" value="{{info.name}}">
+            </div>
+            <span style="color:red;display: none;" class="tips"></span>
+            <span style="display: none;" class="glyphicon glyphicon-remove form-control-feedback"></span>
+            <span style="display: none;" class="glyphicon glyphicon-ok form-control-feedback"></span>
+        </div>
+        <div class="form-group has-feedback">
+            <label for="passwordInput">密码：</label>
+            <div class="input-group">
+                <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+                <input type="password" class="form-control" placeholder="请输入密码"
+                       id="passwordInput" name="passwordInput" value="{{info.password}}">
+            </div>
+            <span style="color:red;display: none;" class="tips"></span>
+            <span style="display: none;" class=" glyphicon glyphicon-remove form-control-feedback"></span>
+            <span style="display: none;" class="glyphicon glyphicon-ok form-control-feedback"></span>
+        </div>
+        <div class="form-group has-feedback">
+            <label for="repasswordInput">确认密码：</label>
+            <div class="input-group">
+                <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+                <input type="password" class="form-control" placeholder="请再次输入密码"
+                       id="repasswordInput" value="{{info.password}}">
+            </div>
+            <span style="color:red;display: none;" class="tips"></span>
+            <span style="display: none;" class="glyphicon glyphicon-remove form-control-feedback"></span>
+            <span style="display: none;" class="glyphicon glyphicon-ok form-control-feedback"></span>
+        </div>
+        <div class="form-group">
+            <label for="schoolInput">学校：</label>
+            <div class="input-group">
+                <span class="input-group-addon"><span class="glyphicon glyphicon-home"></span></span>
+                <select name="schoolInput" id="schoolInput" class="form-control" name="schoolInput">
+                    {% if info.school=="西南科技大学"%}
+                    <option value="西南科技大学" selected>西南科技大学</option>
+                    {% else %}
+                    <option value="西南科技大学">西南科技大学</option>
+                    {% endif %}
+                    {% if info.school=="四川师范大学"%}
+                    <option value="四川师范大学" selected>四川师范大学</option>
+                    {% else %}
+                    <option value="四川师范大学">四川师范大学</option>
+                    {% endif %}
+                    {% if info.school=="电子科技大学"%}
+                    <option value="电子科技大学" selected>电子科技大学</option>
+                    {% else %}
+                    <option value="电子科技大学">电子科技大学</option>
+                    {% endif %}
+                </select>
+            </div>
+        </div>
+        <div class="form-group has-feedback" style="display: none;">
+            <label for="emailInput">邮箱：</label>
+            <div class="input-group">
+                <span class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span></span>
+                <input type="text" class="form-control" placeholder="请输入有效邮箱"
+                       id="emailInput" name="emailInput" value="{{info.email}}">
+            </div>
+            <span style="color:red;display: none;" class="tips"></span>
+            <span style="display: none;" class="glyphicon glyphicon-remove form-control-feedback"></span>
+            <span style="display: none;" class="glyphicon glyphicon-ok form-control-feedback"></span>
+        </div>
+        <div class="form-group has-feedback">
+            <label for="phoneInput">手机号码：</label>
+            <div class="input-group">
+                <span class="input-group-addon"><span class="glyphicon glyphicon-phone"></span></span>
+                <input type="text" class="form-control" placeholder="请输入手机号码"
+                       id="phoneInput" name="phoneInput" value="{{info.phone}}">
+            </div>
+            <span style="color:red;display: none;" class="tips"></span>
+            <span style="display: none;" class="glyphicon glyphicon-remove form-control-feedback"></span>
+            <span style="display: none;" class="glyphicon glyphicon-ok form-control-feedback"></span>
+        </div>
+        <div class="form-group">
+            <input type="submit" id="submit" class="form-control btn btn-primary"
+                   value="保&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;存"/>
+            <span id="save"></span>
+        </div>
+    </form>
+</div>
+<script type="text/javascript" src="/public/js/register.js"></script>
+{%endblock%}

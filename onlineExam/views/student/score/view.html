@@ -1,0 +1,132 @@
+{% extends '../layout.html' %} <!--使用公共模块-->
+{% block main %}  <!--实现占位模块-->
+<link rel="stylesheet" href="/public/css/inputBox.css" type="text/css"/>
+<style>
+    .answer{
+        margin-left: 40px;
+        color: #11f00c;
+    }
+    .good{
+        margin-left: 40px;
+        color: #1feb38;
+        background-color: #e5e5d5;
+    }
+</style>
+<ol class="breadcrumb">
+    <li><a href="/">管理首页</a></li>
+    <li><a href="/exam">试卷首页</a></li>
+    <li><span>{{exam.title}}</span></li>
+    <span style="display: none" id="getCT">{{ct}}</span>
+</ol>
+<div style="background: white;">
+    <h3 class="text-center"><b>{{exam.title}}</b></h3>
+    <p class="text-center" style="font-size: 10px;">
+        <span style="margin-left: 15px">科目：{{exam.subject.name}}</span>
+        <span style="margin-left: 15px">出题老师：{{exam.teacher.name}}</span>
+        <span style="margin-left: 15px">考试开始时间：{{exam.startTime|date("Y年m月d日H:i:s",-8*60)}}</span>
+        <span style="margin-left: 15px">考试结束时间：{{exam.endTime|date("Y年m月d日H:i:s",-8*60)}}</span>
+        <span style="margin-left: 15px">题数：{{exam.numOfQuestions}}</span>
+        <span style="margin-left: 15px">总分：{{exam.sumScore}}</span>
+    </p>
+    <p class="text-center" style="font-size: 10px;">
+        {{exam.description}}
+    </p>
+    <div style="font-size: 20px;margin:0px 15px;">
+        {% for Question in questions %}
+        {% if Question.question.style=='single' %}
+        <p>(单选题)<span>{{Question.index}}、{{Question.question.title}}</span>
+            </p>
+        <form class="form">
+            {% for option in Question.question.options %}
+            <div class="inputGroup">
+                <input id="'radio'+'{{Question.question.index}}'+'{{option.name}}'" name="radio" type="radio"/>
+                <label for="'radio'+'{{Question.question.index}}'+'{{option.name}}'">{{option.name}}、{{option.info}}</label>
+            </div>
+            {% endfor %}
+        </form>
+        <p class="answer"></p>
+        <p class="good"><span>
+                (<span>正确答案：{{Question.question.answer}}</span>
+                <span style="margin-left: 15px">分值：{{Question.question.score}}</span>
+                <span style="margin-left: 15px">考点：{{Question.question.center}}</span>
+                {% if Question.question.difficulty=="simple"||Question.question.difficulty=="" %}
+                 <span style="margin-left: 15px">难度：简单</span>
+                {% elseif Question.question.difficulty=="general" %}
+                  <span style="margin-left: 15px">难度：一般</span>
+                {% elseif Question.question.difficulty=="hard" %}
+                  <span style="margin-left: 15px">难度：困难</span>
+                {% endif %}
+                <span style="margin-left: 15px">出题时间：{{Question.question.createTime|date("Y年m月d日 H:i:s",-8*60)}})</span>
+            </span></p>
+        {% elseif Question.question.style=='multiple' %}
+        <p>(多选题)<span>{{Question.index}}、{{Question.question.title}}</span>
+        </p>
+        <form class="form">
+            {% for option in Question.question.options %}
+            <div class="inputGroup">
+                <input id="'option'+'{{Question.question.index}}'+'{{option.name}}'" name="radio" type="checkbox"/>
+                <label for="'option'+'{{Question.question.index}}'+'{{option.name}}'">{{option.name}}、{{option.info}}</label>
+            </div>
+            {% endfor %}
+        </form>
+        <p class="answer"></p>
+        <p class="good"><span>
+                (<span >正确答案：{{Question.question.answer}}</span>
+                <span style="margin-left: 15px">分值：{{Question.question.score}}</span>
+                <span style="margin-left: 15px">考点：{{Question.question.center}}</span>
+                {% if Question.question.difficulty=="simple"||Question.question.difficulty=="" %}
+                 <span style="margin-left: 15px">难度：简单</span>
+                {% elseif Question.question.difficulty=="general" %}
+                  <span style="margin-left: 15px">难度：一般</span>
+                {% elseif Question.question.difficulty=="hard" %}
+                  <span style="margin-left: 15px">难度：困难</span>
+                {% endif %}
+                <span style="margin-left: 15px">出题时间：{{Question.question.createTime|date("Y年m月d日 H:i:s",-8*60)}})</span>
+            </span></p>
+        {% else %}
+        <p>(问答题)<span>{{Question.index}}、{{Question.question.title}}</span></p>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;答：{{Question.question.answer}}</p>
+        <p class="answer"></p>
+        <p class="good"><span>
+                (<span >分值：{{Question.question.score}}</span>
+                <span style="margin-left: 15px">考点：{{Question.question.center}}</span>
+                {% if Question.question.difficulty=="simple"||Question.question.difficulty=="" %}
+                 <span style="margin-left: 15px">难度：简单</span>
+                {% elseif Question.question.difficulty=="general" %}
+                  <span style="margin-left: 15px">难度：一般</span>
+                {% elseif Question.question.difficulty=="hard" %}
+                  <span style="margin-left: 15px">难度：困难</span>
+                {% endif %}
+                <span style="margin-left: 15px">出题时间：{{Question.question.createTime|date("Y年m月d日 H:i:s",-8*60)}})</span>
+            </span></p>
+        {% endif %}
+        {% endfor %}
+    </div>
+</div>
+<script>
+    $(function () {  //初始化
+        console.log()
+        $.ajax({
+            type:"post",
+            url:"/api/getAnswer",
+            data:{
+                id:$("#getCT").html()
+            },
+            dataType:"json",
+            success:function (responseData) {
+                console.log(responseData.answer);
+                var data=responseData.answer;
+                var answer=$(".answer");
+               for(var i=0;i<data.length;i++){
+                   var html="<p>"+"你的答案为："+data[i].submit+"</p>"+
+                       "<p>"+"你的得分为："+data[i].score+"</p>"
+                   answer.eq(i).html(html);
+               }
+
+
+            }
+        });
+    });
+
+</script>
+{%endblock%}
